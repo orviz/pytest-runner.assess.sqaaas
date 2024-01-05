@@ -1,0 +1,42 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.0
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/pytest-dev/pytest-runner:
+      branch: main
+      repo: https://github.com/pytest-dev/pytest-runner
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/pytest-dev/pytest-runner git:
+        commands:
+        - /usr/bin/env sh .sqa/script.squirrely-beige-pinscher.sh
+        container: qc.acc_grumpy-tomato-zorse
+  QC.Doc:
+    repos:
+      github.com/pytest-dev/pytest-runner find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.stuffy-seashell-spoonbill.sh
+        container: qc.doc_ready-teal-devil
+      github.com/pytest-dev/pytest-runner git:
+        commands:
+        - /usr/bin/env sh .sqa/script.flabby-buff-albatross.sh
+        container: qc.doc_droopy-brown-hyrax
+  QC.Lic:
+    repos:
+      github.com/pytest-dev/pytest-runner licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-ultramarine-mule.sh
+        container: qc.lic_ready-periwinkle-ostrich
+  QC.Ver:
+    repos:
+      github.com/pytest-dev/pytest-runner get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-silver-crocodile.sh
+        container: qc.ver_sleepy-bronze-jackal
+timeout: 5400
