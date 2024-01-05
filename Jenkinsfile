@@ -15,7 +15,7 @@ pipeline {
                 anyOf {
                     changeset ".sqa/*"
                     changeset "Jenkinsfile"
-                    expression { currentBuild.previousCompletedBuild != null }
+                    expression { env.BUILD_NUMBER == 1 }
                 }
             }
             steps {
